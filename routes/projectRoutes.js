@@ -6,6 +6,7 @@ const projectsDb = require("../data/helpers/projectModel");
 
 // middleware
 const nameLowercase = require("../middleware/nameLowercase");
+const desLength = require("../middleware/desLength");
 
 // routes
 router.get("/", async (req, res) => {
@@ -49,7 +50,7 @@ router.get("/:id/actions", async (req, res) => {
   }
 });
 
-router.post("/add-project", nameLowercase, async (req, res) => {
+router.post("/add-project", desLength, nameLowercase, async (req, res) => {
   const newProject = req.body;
   await projectsDb.insert(newProject);
 
